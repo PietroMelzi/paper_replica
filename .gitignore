@@ -1,0 +1,9 @@
+# data
+data/
+preproc_data
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Matlab
+*.asv
