@@ -7,3 +7,6 @@ preproc_data
 
 # Matlab
 *.asv
+
+# Images
+*.png

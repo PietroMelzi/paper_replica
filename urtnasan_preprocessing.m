@@ -18,13 +18,18 @@ for index_list = 1:length(list)
     [P, Q] = rat(120/128);
     signal = resample(signal, P, Q);
 
+    % bandpass filter (check if the interval is correct)
+    signal = bandpass(signal, [8 20], 120);
+
     %obtain short-term 30s ECGs (120Hz * 30s = 3600 -> length of each sample)
     short_samples = [];
     index = 1;
     sample_size = 3600;
     while (index <= length(signal))
         % every column in 'short_samples' is a 30s sample!
-        short_samples = [short_samples signal(index:index+sample_size-1)]; 
+        if index+sample_size-1 <= length(signal)
+            short_samples = [short_samples signal(index:index+sample_size-1)];
+        end
         index = index+sample_size;
     end
 
@@ -34,14 +39,12 @@ for index_list = 1:length(list)
 
         signal = short_samples(:, i);
         if (length(signal) < sample_size)
-            signal(numel(zeros(900, 1))) = 0;
+            signal(numel(zeros(sample_size, 1))) = 0;
         end
-
-        % bandpass filter (check if the interval is correct)
-        signal = bandpass(signal, [8 20], 120);
 
         % apply discrete wavelet transform, using 'haar'
         [a, d] = haart(signal);
+        
         % obtain a signal with length = 1*900
         signal = d{1, 2};
         assert(length(signal) == 900)
@@ -50,8 +53,8 @@ for index_list = 1:length(list)
 
     end
 
-    cd ../../preproc_data/afpdb
-    filename = [filename '.csv'];
-    writematrix(short_samples_preproc, filename);
-    cd ../../data/afpdb
+%     cd ../../preproc_data/afpdb
+%     filename = [filename '.csv'];
+%     writematrix(short_samples_preproc, filename);
+%     cd ../../data/afpdb
 end
