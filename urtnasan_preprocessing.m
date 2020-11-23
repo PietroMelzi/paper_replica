@@ -7,7 +7,6 @@ list = list(1:2:200);
 % end
 
 for index_list = 1:length(list)
-    % try with the first sample
     filename = [list{1, index_list} 'm'];
     [tm, signal,FS, labels] = rdmat(filename);
 
@@ -53,8 +52,8 @@ for index_list = 1:length(list)
 
     end
 
-%     cd ../../preproc_data/afpdb
-%     filename = [filename '.csv'];
-%     writematrix(short_samples_preproc, filename);
-%     cd ../../data/afpdb
+    cd ../../preproc_data/afpdb
+    filename = [filename '.csv'];
+    writematrix(short_samples_preproc, filename);
+    cd ../../data/afpdb
 end
