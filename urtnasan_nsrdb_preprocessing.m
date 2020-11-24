@@ -13,7 +13,7 @@ for index_list = 1:length(list)
     signal = signal(:,1);
     
     % consider only a subset of the entire signal
-    signal = signal(1:729600);
+    signal = signal(1:729600*2);
 
     % change sample frequency from 128Hz to 120Hz
     [P, Q] = rat(120/128);

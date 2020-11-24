@@ -18,7 +18,7 @@ for index_list = 1:length(list)
     signal = resample(signal, P, Q);
 
     % bandpass filter (check if the interval is correct)
-    signal = bandpass(signal, [8 20], 120);
+    signal = bandpass(signal, [1 28], 120);
 
     %obtain short-term 30s ECGs (120Hz * 30s = 3600 -> length of each sample)
     short_samples = [];
