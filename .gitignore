@@ -10,3 +10,6 @@ preproc_data
 
 # Images
 *.png
+
+# R
+*.Rhistory
